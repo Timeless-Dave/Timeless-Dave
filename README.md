@@ -37,7 +37,17 @@
 
 ### 🧑‍💻 About Me
 
-I study Computer Science at UAPB on a full scholarship and focus on full-stack, cloud, AI/ML, and Web3. I ship with Python, TypeScript, Go, React, Next.js, FastAPI, AWS, and GCP. I am a five-time hackathon winner, including first in Nigeria and top two globally in IEEEXtreme. I work as a developer, project manager, community manager, and Web3 analyst, and I am open to collaborations, open source, and ambitious projects.
+<pre>const timeless = {
+  role  : "Computer Science @ UAPB (Scholarship)",
+  focus : ["Full-Stack", "Cloud", "AI/ML", "Web3"],
+  stack : ["Python", "TypeScript", "Go", "React",
+           "Next.js", "FastAPI", "AWS", "GCP"],
+  wins  : ["5× Hackathon Winner",
+           "#1 Nigeria · Top 2 Global — IEEEXtreme"],
+  roles : ["Developer", "Project Manager",
+           "Community Manager", "Web3 Analyst"],
+  openTo: ["Collabs", "Open Source", "Big Ideas"],
+};</pre>
 
 </td>
 <td valign="top" width="42%" align="center">
@@ -56,9 +66,8 @@ I study Computer Science at UAPB on a full scholarship and focus on full-stack, 
 
 </td>
 </tr>
-</table>
-
----
+<tr>
+<td colspan="2" valign="top">
 
 ## 🛠️ Tech Stack
 
@@ -94,6 +103,10 @@ I study Computer Science at UAPB on a full scholarship and focus on full-stack, 
 **🔧 Tools**
 
 <img src="https://skillicons.dev/icons?i=postman,powershell,latex,git,github&theme=dark&perline=7" width="100%" title="Postman · PowerShell · LaTeX · Git · GitHub"/>
+
+</td>
+</tr>
+</table>
 
 </td>
 </tr>
