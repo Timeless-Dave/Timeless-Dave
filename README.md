@@ -80,6 +80,7 @@
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td align="center" valign="top" width="50%">
+<img width="495" height="0" src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/github-contribution-grid-snake-dark.svg" alt=""/>
 
 <strong>⌨️ Languages</strong><br/><br/>
 
@@ -87,6 +88,7 @@
 
 </td>
 <td align="center" valign="top" width="50%">
+<img width="495" height="0" src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/github-contribution-grid-snake-dark.svg" alt=""/>
 
 <strong>⚙️ Frameworks &amp; Libraries</strong><br/><br/>
 
@@ -96,6 +98,7 @@
 </tr>
 <tr>
 <td align="center" valign="top" width="50%">
+<img width="495" height="0" src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/github-contribution-grid-snake-dark.svg" alt=""/>
 
 <strong>☁️ Cloud &amp; DevOps</strong><br/><br/>
 
@@ -103,6 +106,7 @@
 
 </td>
 <td align="center" valign="top" width="50%">
+<img width="495" height="0" src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/github-contribution-grid-snake-dark.svg" alt=""/>
 
 <strong>🔧 Tools</strong><br/><br/>
 
