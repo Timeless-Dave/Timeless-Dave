@@ -6,7 +6,26 @@
 
 <br/>
 
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/1davidadedeji/)&nbsp;![Views](https://komarev.com/ghpvc/?username=Timeless-Dave&label=Profile+Views&color=a78bfa&style=for-the-badge)
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/1davidadedeji/)&nbsp;[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/1davidadedeji)&nbsp;[![X](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=x&logoColor=white)](https://x.com/1davidadedeji)
+
+<br/>
+
+<div align="center">
+<details>
+<summary><b>📄 Resume</b> &nbsp;▼</summary>
+
+[![View in browser](https://img.shields.io/badge/View%20in%20browser-0d1117?style=for-the-badge&logo=googledocs&logoColor=white)](https://github.com/Timeless-Dave/Timeless-Dave/blob/main/docs/0001%20David%20Adedeji%20Resume.pdf)&nbsp;[![Download PDF](https://img.shields.io/badge/Download%20PDF-a78bfa?style=for-the-badge&logo=googledrive&logoColor=white)](https://github.com/Timeless-Dave/Timeless-Dave/raw/main/docs/0001%20David%20Adedeji%20Resume.pdf)
+
+</details>
+</div>
+
+<br/>
+
+![Views](https://komarev.com/ghpvc/?username=Timeless-Dave&label=Profile+Views&color=a78bfa&style=for-the-badge)
+
+<!--
+  Resume PDF: docs/0001 David Adedeji Resume.pdf — rename file? update both URLs (blob + raw) to match.
+-->
 
 </div>
 
@@ -22,7 +41,7 @@
 
 ---
 
-<table width="100%">
+<table width="100%" cellpadding="10" cellspacing="0" border="0">
 <tr>
 <td valign="top" width="58%">
 
@@ -63,7 +82,7 @@
 
 ## 🛠️ Tech Stack
 
-<table width="100%">
+<table width="100%" cellpadding="10" cellspacing="0" border="0">
 <tr>
 <td valign="top" width="50%" align="center">
 
@@ -104,18 +123,18 @@
 
 ## 📊 GitHub Analytics
 
-<table width="100%">
+<table width="100%" cellpadding="10" cellspacing="0" border="0">
 <tr>
-<td align="center" width="50%">
+<td align="center" width="50%" valign="top">
 <img src="https://github-readme-stats.vercel.app/api?username=Timeless-Dave&show_icons=true&hide_border=true&include_all_commits=true&count_private=true&bg_color=0d1117&title_color=a78bfa&icon_color=a78bfa&text_color=c9d1d9&ring_color=a78bfa" width="100%"/>
 </td>
-<td align="center" width="50%">
+<td align="center" width="50%" rowspan="2" valign="middle">
 <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Timeless-Dave&hide_border=true&include_all_commits=true&count_private=true&layout=donut&bg_color=0d1117&title_color=a78bfa&text_color=c9d1d9&langs_count=8" width="100%"/>
 </td>
 </tr>
 <tr>
-<td colspan="2" align="center">
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=Timeless-Dave&hide_border=true&background=0d1117&ring=a78bfa&fire=f97316&currStreakLabel=a78bfa&sideNums=c9d1d9&sideLabels=c9d1d9&dates=666666&stroke=0d1117" width="60%"/>
+<td align="center" width="50%" valign="bottom">
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=Timeless-Dave&hide_border=true&background=0d1117&ring=a78bfa&fire=f97316&currStreakLabel=a78bfa&sideNums=c9d1d9&sideLabels=c9d1d9&dates=666666&stroke=0d1117" width="100%"/>
 </td>
 </tr>
 <tr>
@@ -152,3 +171,8 @@
 <div align="center">
 <img src="https://capsule-render.vercel.app/api?type=waving&color=%230d1117&height=100&section=footer" width="100%"/>
 </div>
+
+<!--
+  Resume: default file docs/0001 David Adedeji Resume.pdf (URLs use %20 for spaces).
+  External hosting: swap the View / Download badge hrefs to Drive or another host if you prefer.
+-->
