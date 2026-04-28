@@ -1,0 +1,62 @@
+name: Generate Profile Assets
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ── Snake ─────────────────────────────────────────────────────────────
+      - name: Generate snake SVGs
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-contribution-grid-snake.svg?color_snake=%23e11d48&color_dots[0]=%23ebedf0&color_dots[1]=%23c6e48b&color_dots[2]=%237bc96f&color_dots[3]=%23239a3b&color_dots[4]=%23196127
+            dist/github-contribution-grid-snake-dark.svg?color_snake=%23f97316&color_dots[0]=%230d1117&color_dots[1]=%230e4429&color_dots[2]=%23006d32&color_dots[3]=%2326a641&color_dots[4]=%2339d353
+
+      # ── 3D Calendar ───────────────────────────────────────────────────────
+      - name: Generate 3D contribution calendar
+        uses: yoshi389111/github-profile-3d-contrib@0.7.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+
+      # ── Collect into dist/ ────────────────────────────────────────────────
+      - name: Collect all output files
+        run: |
+          mkdir -p dist/profile-3d-contrib
+          if ls profile-3d-contrib/*.svg 1>/dev/null 2>&1; then
+            cp profile-3d-contrib/*.svg dist/profile-3d-contrib/
+            echo "3D files copied:"
+            ls dist/profile-3d-contrib/
+          else
+            echo "No 3D SVG files found in profile-3d-contrib/"
+          fi
+          echo "Snake files:"
+          ls dist/*.svg 2>/dev/null || echo "No snake files"
+
+      # ── Single push to output branch ─────────────────────────────────────
+      - name: Deploy everything to output branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: output
+          publish_dir: ./dist
+          force_orphan: true
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
+          commit_message: "chore: update profile assets"

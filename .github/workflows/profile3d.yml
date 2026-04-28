@@ -1,37 +1,14 @@
-name: Generate 3D Contribution Calendar
-
+# Superseded by generate-assets.yml — kept to avoid broken workflow references.
+# Do not enable triggers here.
+name: Generate 3D Contribution Calendar (disabled)
 on:
-  schedule:
-    - cron: "0 18 * * *"
   workflow_dispatch:
-  push:
-    branches:
-      - main
-
-permissions:
-  contents: write
-
+    inputs:
+      note:
+        description: "Use generate-assets.yml instead"
+        required: false
 jobs:
-  build:
+  noop:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Generate 3D contribution calendar
-        uses: yoshi389111/github-profile-3d-contrib@0.7.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: ${{ github.repository_owner }}
-
-      - name: Deploy to output branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: output
-          publish_dir: ./profile-3d-contrib
-          destination_dir: profile-3d-contrib
-          keep_files: true
-          user_name: github-actions[bot]
-          user_email: github-actions[bot]@users.noreply.github.com
-          commit_message: "chore: update 3D contribution calendar"
+      - run: echo "Use the 'Generate Profile Assets' workflow instead."

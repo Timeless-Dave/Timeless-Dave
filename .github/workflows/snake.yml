@@ -1,37 +1,14 @@
-name: Generate Contribution Snake
-
+# Superseded by generate-assets.yml — kept to avoid broken workflow references.
+# Do not enable triggers here.
+name: Generate Contribution Snake (disabled)
 on:
-  schedule:
-    - cron: "0 0 * * *"
   workflow_dispatch:
-  push:
-    branches:
-      - main
-
-permissions:
-  contents: write
-
+    inputs:
+      note:
+        description: "Use generate-assets.yml instead"
+        required: false
 jobs:
-  generate:
+  noop:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
     steps:
-      - name: Generate snake SVGs
-        uses: Platane/snk/svg-only@v3
-        with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: |
-            dist/github-contribution-grid-snake.svg?color_snake=red&color_dots[0]=ebebeb&color_dots[1]=c6e48b&color_dots[2]=7bc96f&color_dots[3]=239a3b&color_dots[4]=196127
-            dist/github-contribution-grid-snake-dark.svg?color_snake=orange&color_dots[0]=161b22&color_dots[1]=0e4429&color_dots[2]=006d32&color_dots[3]=26a641&color_dots[4]=39d353
-
-      - name: Deploy to output branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: output
-          publish_dir: ./dist
-          keep_files: true
-          user_name: github-actions[bot]
-          user_email: github-actions[bot]@users.noreply.github.com
-          commit_message: "chore: update contribution snake"
+      - run: echo "Use the 'Generate Profile Assets' workflow instead."
