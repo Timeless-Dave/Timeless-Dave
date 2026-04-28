@@ -53,7 +53,7 @@
 
 <br/>
 
-<sub>Open a Discussion → AI replies in ~30s<br/>Powered by OpenAI · runs on GitHub Actions</sub>
+<sub>Open a Discussion → AI replies in ~30s<br/>Powered by Myself · runs on GitHub Actions</sub>
 
 </td>
 </tr>
@@ -115,7 +115,7 @@
 </tr>
 <tr>
 <td colspan="2" align="center">
-<img src="https://github-readme-streak-stats.demolab.com/?user=Timeless-Dave&hide_border=true&background=0d1117&ring=a78bfa&fire=f97316&currStreakLabel=a78bfa&sideNums=c9d1d9&sideLabels=c9d1d9&dates=666666&stroke=0d1117" width="60%"/>
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=Timeless-Dave&hide_border=true&background=0d1117&ring=a78bfa&fire=f97316&currStreakLabel=a78bfa&sideNums=c9d1d9&sideLabels=c9d1d9&dates=666666&stroke=0d1117" width="60%"/>
 </td>
 </tr>
 <tr>
