@@ -2,30 +2,20 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=%230d1117&height=140&section=header&text=David%20Adedeji&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=40&desc=Timeless%20%E2%80%A2%20CS%20%40%20UAPB%20%E2%80%A2%20Builder&descSize=15&descAlignY=60&descAlign=50" width="100%"/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&duration=2800&pause=800&color=A78BFA&center=true&vCenter=true&width=680&lines=5%C3%97+Hackathon+Winner+%7C+%231+Nigeria+%7C+Top+2+Global+%E2%80%94+IEEEXtreme;Full-Stack+%E2%80%A2+Cloud+%E2%80%A2+AI%2FML+%E2%80%A2+Web3+%E2%80%A2+CS+%40+UAPB" alt="Typing SVG"/>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&duration=2800&pause=800&color=A78BFA&center=true&vCenter=true&width=1000&lines=5%C3%97+Hackathon+Winner+%7C+%231+Nigeria+%7C+Top+2+Global+%E2%80%94+IEEEXtreme;Full-Stack+%E2%80%A2+Cloud+%E2%80%A2+AI%2FML+%E2%80%A2+Web3+%E2%80%A2+CS+%40+UAPB" alt="Typing SVG" width="100%"/>
 
 <br/>
 
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/1davidadedeji/)&nbsp;[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/1davidadedeji)&nbsp;[![X](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=x&logoColor=white)](https://x.com/1davidadedeji)
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/1davidadedeji/)&nbsp;[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/1davidadedeji)&nbsp;[![X](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=x&logoColor=white)](https://x.com/1davidadedeji)&nbsp;![Views](https://komarev.com/ghpvc/?username=Timeless-Dave&label=Profile+Views&color=a78bfa&style=for-the-badge)
 
 <br/>
 
-<div align="center">
 <details>
 <summary><b>📄 Resume</b> &nbsp;▼</summary>
 
 [![View in browser](https://img.shields.io/badge/View%20in%20browser-0d1117?style=for-the-badge&logo=googledocs&logoColor=white)](https://github.com/Timeless-Dave/Timeless-Dave/blob/main/docs/0001%20David%20Adedeji%20Resume.pdf)&nbsp;[![Download PDF](https://img.shields.io/badge/Download%20PDF-a78bfa?style=for-the-badge&logo=googledrive&logoColor=white)](https://github.com/Timeless-Dave/Timeless-Dave/raw/main/docs/0001%20David%20Adedeji%20Resume.pdf)
 
 </details>
-</div>
-
-<br/>
-
-![Views](https://komarev.com/ghpvc/?username=Timeless-Dave&label=Profile+Views&color=a78bfa&style=for-the-badge)
-
-<!--
-  Resume PDF: docs/0001 David Adedeji Resume.pdf — rename file? update both URLs (blob + raw) to match.
--->
 
 </div>
 
@@ -41,23 +31,13 @@
 
 ---
 
-<table width="100%" cellpadding="10" cellspacing="0" border="0">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td valign="top" width="58%">
 
 ### 🧑‍💻 About Me
 
-<pre>const timeless = {
-  role  : "Computer Science @ UAPB (Scholarship)",
-  focus : ["Full-Stack", "Cloud", "AI/ML", "Web3"],
-  stack : ["Python", "TypeScript", "Go", "React",
-           "Next.js", "FastAPI", "AWS", "GCP"],
-  wins  : ["5× Hackathon Winner",
-           "#1 Nigeria · Top 2 Global — IEEEXtreme"],
-  roles : ["Developer", "Project Manager",
-           "Community Manager", "Web3 Analyst"],
-  openTo: ["Collabs", "Open Source", "Big Ideas"],
-};</pre>
+I study Computer Science at UAPB on a full scholarship and focus on full-stack, cloud, AI/ML, and Web3. I ship with Python, TypeScript, Go, React, Next.js, FastAPI, AWS, and GCP. I am a five-time hackathon winner, including first in Nigeria and top two globally in IEEEXtreme. I work as a developer, project manager, community manager, and Web3 analyst, and I am open to collaborations, open source, and ambitious projects.
 
 </td>
 <td valign="top" width="42%" align="center">
@@ -82,7 +62,7 @@
 
 ## 🛠️ Tech Stack
 
-<table width="100%" cellpadding="10" cellspacing="0" border="0">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td valign="top" width="50%" align="center">
 
@@ -123,7 +103,7 @@
 
 ## 📊 GitHub Analytics
 
-<table width="100%" cellpadding="10" cellspacing="0" border="0">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td align="center" width="50%" valign="top">
 <img src="https://github-readme-stats.vercel.app/api?username=Timeless-Dave&show_icons=true&hide_border=true&include_all_commits=true&count_private=true&bg_color=0d1117&title_color=a78bfa&icon_color=a78bfa&text_color=c9d1d9&ring_color=a78bfa" width="100%"/>
@@ -171,8 +151,3 @@
 <div align="center">
 <img src="https://capsule-render.vercel.app/api?type=waving&color=%230d1117&height=100&section=footer" width="100%"/>
 </div>
-
-<!--
-  Resume: default file docs/0001 David Adedeji Resume.pdf (URLs use %20 for spaces).
-  External hosting: swap the View / Download badge hrefs to Drive or another host if you prefer.
--->
