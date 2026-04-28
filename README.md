@@ -31,15 +31,16 @@
 
 ---
 
+<div style="width:100%; overflow-x: hidden;">
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td valign="top" width="50%">
 
 <h3 align="left">🧑‍💻 About Me</h3>
 
-<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td width="100%">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td width="100%" style="overflow-x: auto; max-width: 100%;">
 
-<pre>const timeless = {
+<pre style="overflow-x: auto; white-space: pre; max-width: 100%;">const timeless = {
   role  : "Computer Science @ UAPB (Scholarship)",
   focus : ["Full-Stack", "Cloud", "AI/ML", "Web3"],
   stack : ["Python", "TypeScript", "Go", "React",
@@ -71,9 +72,11 @@
 </td>
 </tr>
 </table>
+</div>
 
 ## 🛠️ Tech Stack
 
+<div align="center">
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td align="center" valign="top" width="50%">
@@ -108,6 +111,7 @@
 </td>
 </tr>
 </table>
+</div>
 
 ---
 
