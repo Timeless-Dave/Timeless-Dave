@@ -70,8 +70,7 @@
 
 </td>
 </tr>
-<tr>
-<td colspan="2" width="100%" valign="top">
+</table>
 
 <h2 align="center">🛠️ Tech Stack</h2>
 
@@ -79,16 +78,16 @@
 <tr>
 <td valign="top" width="50%" align="center">
 
-**⌨️ Languages**
+<p align="center"><strong>⌨️ Languages</strong></p>
 
-<img src="https://skillicons.dev/icons?i=python,javascript,typescript,go,php,html,css&theme=dark&perline=7" width="100%" title="Python · JavaScript · TypeScript · Go · PHP · HTML · CSS"/>
+<p align="center"><img src="https://skillicons.dev/icons?i=python,javascript,typescript,go,php,html,css&theme=dark&perline=7" width="100%" title="Python · JavaScript · TypeScript · Go · PHP · HTML · CSS" alt="Languages"/></p>
 
 </td>
 <td valign="top" width="50%" align="center">
 
-**⚙️ Frameworks & Libraries**
+<p align="center"><strong>⚙️ Frameworks &amp; Libraries</strong></p>
 
-<img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,fastapi,tensorflow&theme=dark&perline=7" width="100%" title="React · Next.js · Node.js · FastAPI · TensorFlow"/>
+<p align="center"><img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,fastapi,tensorflow&theme=dark&perline=5" width="100%" title="React · Next.js · Node.js · FastAPI · TensorFlow" alt="Frameworks"/></p>
 
 </td>
 </tr>
@@ -96,21 +95,17 @@
 <td valign="top" width="50%" align="center">
 <br/>
 
-**☁️ Cloud & DevOps**
+<p align="center"><strong>☁️ Cloud &amp; DevOps</strong></p>
 
-<img src="https://skillicons.dev/icons?i=aws,gcp,firebase,vercel,netlify,cloudflare,nginx&theme=dark&perline=7" width="100%" title="AWS · GCP · Firebase · Vercel · Netlify · Cloudflare · Nginx"/>
+<p align="center"><img src="https://skillicons.dev/icons?i=aws,gcp,firebase,vercel,netlify,cloudflare,nginx&theme=dark&perline=7" width="100%" title="AWS · GCP · Firebase · Vercel · Netlify · Cloudflare · Nginx" alt="Cloud"/></p>
 
 </td>
 <td valign="top" width="50%" align="center">
 <br/>
 
-**🔧 Tools**
+<p align="center"><strong>🔧 Tools</strong></p>
 
-<img src="https://skillicons.dev/icons?i=postman,powershell,latex,git,github&theme=dark&perline=7" width="100%" title="Postman · PowerShell · LaTeX · Git · GitHub"/>
-
-</td>
-</tr>
-</table>
+<p align="center"><img src="https://skillicons.dev/icons?i=postman,powershell,latex,git,github&theme=dark&perline=5" width="100%" title="Postman · PowerShell · LaTeX · Git · GitHub" alt="Tools"/></p>
 
 </td>
 </tr>
