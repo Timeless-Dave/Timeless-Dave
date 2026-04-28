@@ -13,29 +13,51 @@
 ---
 
 <div align="center">
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/github-contribution-grid-snake-dark.svg"/>
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/github-contribution-grid-snake.svg"/>
-  <img src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/github-contribution-grid-snake-dark.svg" alt="contribution snake"/>
+  <img src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/github-contribution-grid-snake-dark.svg" alt="contribution snake" width="100%"/>
 </picture>
-
 </div>
 
 ---
 
-## 🧑‍💻 About Me
+<table width="100%">
+<tr>
+<td valign="top" width="58%">
 
-```typescript
-const timeless = {
-  role    : "Computer Science @ UAPB  (Full Scholarship)",
-  focus   : ["Full-Stack Dev", "Cloud", "AI/ML", "System Design", "Web3"],
-  stack   : ["Python", "TypeScript", "Go", "React", "Next.js", "FastAPI", "AWS"],
-  wins    : ["5× Hackathon Winner", "#1 Nigeria · Top 2 Global — IEEEXtreme"],
-  roles   : ["Developer", "Project Manager", "Community Manager", "Web3 Analyst"],
-  openTo  : ["Collabs", "Open Source", "Interesting Problems"],
-};
-```
+### 🧑‍💻 About Me
+
+<pre>const timeless = {
+  role  : "Computer Science @ UAPB (Scholarship)",
+  focus : ["Full-Stack", "Cloud", "AI/ML", "Web3"],
+  stack : ["Python", "TypeScript", "Go", "React",
+           "Next.js", "FastAPI", "AWS", "GCP"],
+  wins  : ["5× Hackathon Winner",
+           "#1 Nigeria · Top 2 Global — IEEEXtreme"],
+  roles : ["Developer", "Project Manager",
+           "Community Manager", "Web3 Analyst"],
+  openTo: ["Collabs", "Open Source", "Big Ideas"],
+};</pre>
+
+</td>
+<td valign="top" width="42%" align="center">
+
+### 🤖 Ask AI Timeless
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=3500&pause=1000&color=666666&center=true&vCenter=true&width=280&lines=Ask+about+my+stack...;Ask+about+my+projects...;Ask+about+my+journey..." alt=""/>
+
+<br/>
+
+[![Ask AI Timeless](https://img.shields.io/badge/Ask-AI%20Timeless%20%F0%9F%A4%96-a78bfa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Timeless-Dave/Timeless-Dave/discussions/new)
+
+<br/>
+
+<sub>Open a Discussion → AI replies in ~30s<br/>Powered by OpenAI · runs on GitHub Actions</sub>
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -47,34 +69,32 @@ const timeless = {
 
 **⌨️ Languages**
 
-<img src="https://skillicons.dev/icons?i=python,javascript,typescript,go,php,html,css&theme=dark&perline=7" title="Python · JavaScript · TypeScript · Go · PHP · HTML · CSS"/>
+<img src="https://skillicons.dev/icons?i=python,javascript,typescript,go,php,html,css&theme=dark&perline=7" width="100%" title="Python · JavaScript · TypeScript · Go · PHP · HTML · CSS"/>
 
 </td>
 <td valign="top" width="50%" align="center">
 
 **⚙️ Frameworks & Libraries**
 
-<img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,fastapi,tensorflow&theme=dark&perline=7" title="React · Next.js · Node.js · FastAPI · TensorFlow"/>
+<img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,fastapi,tensorflow&theme=dark&perline=7" width="100%" title="React · Next.js · Node.js · FastAPI · TensorFlow"/>
 
 </td>
 </tr>
 <tr>
 <td valign="top" width="50%" align="center">
-
 <br/>
 
 **☁️ Cloud & DevOps**
 
-<img src="https://skillicons.dev/icons?i=aws,gcp,firebase,vercel,netlify,cloudflare,nginx&theme=dark&perline=7" title="AWS · GCP · Firebase · Vercel · Netlify · Cloudflare · Nginx"/>
+<img src="https://skillicons.dev/icons?i=aws,gcp,firebase,vercel,netlify,cloudflare,nginx&theme=dark&perline=7" width="100%" title="AWS · GCP · Firebase · Vercel · Netlify · Cloudflare · Nginx"/>
 
 </td>
 <td valign="top" width="50%" align="center">
-
 <br/>
 
-**🔧 Tools & Platforms**
+**🔧 Tools**
 
-<img src="https://skillicons.dev/icons?i=postman,powershell,latex,git,github&theme=dark&perline=7" title="Postman · PowerShell · LaTeX · Git · GitHub"/>
+<img src="https://skillicons.dev/icons?i=postman,powershell,latex,git,github&theme=dark&perline=7" width="100%" title="Postman · PowerShell · LaTeX · Git · GitHub"/>
 
 </td>
 </tr>
@@ -95,7 +115,7 @@ const timeless = {
 </tr>
 <tr>
 <td colspan="2" align="center">
-<img src="https://nirzak-streak-stats.vercel.app/?user=Timeless-Dave&hide_border=true&background=0d1117&ring=a78bfa&fire=f97316&currStreakLabel=a78bfa&sideLabels=c9d1d9&dates=666666&stroke=0d1117" width="55%"/>
+<img src="https://github-readme-streak-stats.demolab.com/?user=Timeless-Dave&hide_border=true&background=0d1117&ring=a78bfa&fire=f97316&currStreakLabel=a78bfa&sideNums=c9d1d9&sideLabels=c9d1d9&dates=666666&stroke=0d1117" width="60%"/>
 </td>
 </tr>
 <tr>
@@ -124,23 +144,7 @@ const timeless = {
 ## 🌐 3D Contribution Calendar
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/profile-3d-contrib/profile-night-rainbow.svg" width="100%" alt="3D Contribution Calendar — generated by GitHub Actions"/>
-</div>
-
----
-
-## 🤖 Ask AI Timeless
-
-<div align="center">
-
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&duration=4000&pause=1000&color=666666&center=true&vCenter=true&width=550&lines=Open+a+Discussion+%E2%86%92+ask+anything+%E2%86%92+AI+replies+in+~30s" alt=""/>
-
-<br/>
-
-[![Ask AI Timeless](https://img.shields.io/badge/Ask-AI%20Timeless%20%F0%9F%A4%96-a78bfa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Timeless-Dave/Timeless-Dave/discussions/new)
-
-<sub>Powered by Myself · knows my skills, stack, projects, and journey · replies automatically via GitHub Actions</sub>
-
+<img src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/profile-3d-contrib/profile-night-rainbow.svg" width="100%" alt="3D Contribution Calendar"/>
 </div>
 
 ---
