@@ -33,9 +33,11 @@
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
-<td valign="top" width="58%">
+<td valign="top" width="50%">
 
-### 🧑‍💻 About Me
+<h3 align="left">🧑‍💻 About Me</h3>
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td width="100%">
 
 <pre>const timeless = {
   role  : "Computer Science @ UAPB (Scholarship)",
@@ -49,12 +51,14 @@
   openTo: ["Collabs", "Open Source", "Big Ideas"],
 };</pre>
 
+</td></tr></table>
+
 </td>
-<td valign="top" width="42%" align="center">
+<td valign="top" width="50%" align="center">
 
-### 🤖 Ask AI Timeless
+<h3 align="center">🤖 Ask AI Timeless</h3>
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=3500&pause=1000&color=666666&center=true&vCenter=true&width=280&lines=Ask+about+my+stack...;Ask+about+my+projects...;Ask+about+my+journey..." alt=""/>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=3500&pause=1000&color=666666&center=true&vCenter=true&width=480&lines=Ask+about+my+stack...;Ask+about+my+projects...;Ask+about+my+journey..." alt="" width="100%"/>
 
 <br/>
 
@@ -67,9 +71,9 @@
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top">
+<td colspan="2" width="100%" valign="top">
 
-## 🛠️ Tech Stack
+<h2 align="center">🛠️ Tech Stack</h2>
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
