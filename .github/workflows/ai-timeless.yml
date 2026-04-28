@@ -1,0 +1,131 @@
+name: AI Timeless — Discussion Reply
+
+on:
+  discussion:
+    types: [created]
+
+permissions:
+  discussions: write
+
+jobs:
+  ai-reply:
+    runs-on: ubuntu-latest
+    # Don't reply to the repo owner or the bot itself
+    if: >
+      github.actor != 'Timeless-Dave' &&
+      github.actor != 'github-actions[bot]'
+
+    steps:
+      - name: Reply with AI Timeless
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DISCUSSION_TITLE: ${{ github.event.discussion.title }}
+          DISCUSSION_BODY: ${{ github.event.discussion.body }}
+          DISCUSSION_NODE_ID: ${{ github.event.discussion.node_id }}
+        run: |
+          python3 << 'PYEOF'
+          import os, json, urllib.request, urllib.error, subprocess, sys
+
+          title    = os.environ.get('DISCUSSION_TITLE', '').strip()
+          body     = os.environ.get('DISCUSSION_BODY', '').strip()
+          node_id  = os.environ.get('DISCUSSION_NODE_ID', '')
+          api_key  = os.environ.get('OPENAI_API_KEY', '')
+
+          if not api_key:
+              print("OPENAI_API_KEY secret not set — skipping.", file=sys.stderr)
+              sys.exit(0)
+
+          system_prompt = (
+              "You are AI Timeless — an AI built on the profile of David Adedeji "
+              "(aka Timeless / Timeless404).\n\n"
+              "Facts about David:\n"
+              "- Computer Science student at the University of Arkansas at Pine Bluff (UAPB) "
+              "on a full scholarship\n"
+              "- Full-stack developer: Python, JavaScript, TypeScript, Go, PHP, React, "
+              "Next.js, Node.js, FastAPI, TensorFlow\n"
+              "- Cloud & DevOps: AWS, GCP, Firebase, Vercel, Netlify, Cloudflare, Nginx\n"
+              "- Competitive programmer: 5× Hackathon Winner; #1 in Nigeria and Global Top 2 "
+              "in IEEEXtreme (8,000+ / 30,000+ participants)\n"
+              "- Roles: Developer, Project Manager, Community Manager, Web3 trader & analyst\n"
+              "- 500+ LinkedIn connections, ~3,750 followers\n"
+              "- Originally from Nigeria, now studying at UAPB\n"
+              "- Philosophy: 'Delay ≠ Denial'\n"
+              "- Open to collaborations, open source, and interesting projects\n"
+              "- GitHub: github.com/Timeless-Dave | Instagram: @1davidadedeji\n\n"
+              "Answer in first person as David, but always mention you are an AI assistant. "
+              "Be concise, friendly, and technical when relevant. "
+              "If asked about a specific project not mentioned here, say you can check "
+              "David's GitHub repos. Keep responses under 350 words."
+          )
+
+          question = f"**{title}**\n\n{body}" if body else title
+
+          payload = {
+              "model": "gpt-4o-mini",
+              "max_tokens": 450,
+              "messages": [
+                  {"role": "system", "content": system_prompt},
+                  {"role": "user", "content": question},
+              ],
+          }
+
+          req = urllib.request.Request(
+              "https://api.openai.com/v1/chat/completions",
+              data=json.dumps(payload).encode("utf-8"),
+              headers={
+                  "Authorization": f"Bearer {api_key}",
+                  "content-type": "application/json",
+              },
+              method="POST",
+          )
+
+          try:
+              with urllib.request.urlopen(req, timeout=30) as resp:
+                  data = json.loads(resp.read())
+              ai_text = data["choices"][0]["message"]["content"]
+          except urllib.error.HTTPError as e:
+              err = e.read().decode()
+              print(f"OpenAI API error {e.code}: {err}", file=sys.stderr)
+              ai_text = (
+                  "Hey! Thanks for stopping by. I'm AI Timeless — I ran into a small "
+                  "hiccup answering your question. For a direct chat, reach David on "
+                  "Instagram [@1davidadedeji](https://www.instagram.com/1davidadedeji/)!"
+              )
+          except Exception as e:
+              print(f"Unexpected error: {e}", file=sys.stderr)
+              sys.exit(1)
+
+          reply = (
+              f"{ai_text}\n\n"
+              "---\n"
+              "*🤖 I'm **AI Timeless** — ask me anything about David's stack, projects, "
+              "or journey.*  \n"
+              "*📩 Direct contact: "
+              "[@1davidadedeji](https://www.instagram.com/1davidadedeji/)*"
+          )
+
+          mutation = """
+          mutation($id: ID!, $body: String!) {
+            addDiscussionComment(input: {discussionId: $id, body: $body}) {
+              comment { id }
+            }
+          }"""
+
+          result = subprocess.run(
+              [
+                  "gh", "api", "graphql",
+                  "-f", f"query={mutation}",
+                  "-f", f"discussionId={node_id}",
+                  "-f", f"body={reply}",
+              ],
+              capture_output=True,
+              text=True,
+          )
+
+          if result.returncode != 0:
+              print(f"GraphQL post failed: {result.stderr}", file=sys.stderr)
+              sys.exit(1)
+
+          print("AI Timeless replied successfully.")
+          PYEOF
