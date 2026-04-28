@@ -72,43 +72,20 @@
 </tr>
 </table>
 
-<h2 align="center">🛠️ Tech Stack</h2>
+## 🛠️ Tech Stack
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
+<colgroup><col width="50%"><col width="50%"></colgroup>
+<tbody>
 <tr>
-<td valign="top" width="50%" align="center">
-
-<p align="center"><strong>⌨️ Languages</strong></p>
-
-<p align="center"><img src="https://skillicons.dev/icons?i=python,javascript,typescript,go,php,html,css&theme=dark&perline=7" width="100%" title="Python · JavaScript · TypeScript · Go · PHP · HTML · CSS" alt="Languages"/></p>
-
-</td>
-<td valign="top" width="50%" align="center">
-
-<p align="center"><strong>⚙️ Frameworks &amp; Libraries</strong></p>
-
-<p align="center"><img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,fastapi,tensorflow&theme=dark&perline=5" width="100%" title="React · Next.js · Node.js · FastAPI · TensorFlow" alt="Frameworks"/></p>
-
-</td>
+<td valign="top" align="center" width="50%"><strong>⌨️ Languages</strong><br/><br/><img src="https://skillicons.dev/icons?i=python,javascript,typescript,go,php,html,css&theme=dark&perline=7" width="100%" style="display:block;max-width:100%;" title="Python · JavaScript · TypeScript · Go · PHP · HTML · CSS" alt="Languages"/></td>
+<td valign="top" align="center" width="50%"><strong>⚙️ Frameworks &amp; Libraries</strong><br/><br/><img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,fastapi,tensorflow&theme=dark&perline=5" width="100%" style="display:block;max-width:100%;" title="React · Next.js · Node.js · FastAPI · TensorFlow" alt="Frameworks"/></td>
 </tr>
 <tr>
-<td valign="top" width="50%" align="center">
-<br/>
-
-<p align="center"><strong>☁️ Cloud &amp; DevOps</strong></p>
-
-<p align="center"><img src="https://skillicons.dev/icons?i=aws,gcp,firebase,vercel,netlify,cloudflare,nginx&theme=dark&perline=7" width="100%" title="AWS · GCP · Firebase · Vercel · Netlify · Cloudflare · Nginx" alt="Cloud"/></p>
-
-</td>
-<td valign="top" width="50%" align="center">
-<br/>
-
-<p align="center"><strong>🔧 Tools</strong></p>
-
-<p align="center"><img src="https://skillicons.dev/icons?i=postman,powershell,latex,git,github&theme=dark&perline=5" width="100%" title="Postman · PowerShell · LaTeX · Git · GitHub" alt="Tools"/></p>
-
-</td>
+<td valign="top" align="center" width="50%"><strong>☁️ Cloud &amp; DevOps</strong><br/><br/><img src="https://skillicons.dev/icons?i=aws,gcp,firebase,vercel,netlify,cloudflare,nginx&theme=dark&perline=7" width="100%" style="display:block;max-width:100%;" title="AWS · GCP · Firebase · Vercel · Netlify · Cloudflare · Nginx" alt="Cloud"/></td>
+<td valign="top" align="center" width="50%"><strong>🔧 Tools</strong><br/><br/><img src="https://skillicons.dev/icons?i=postman,powershell,latex,git,github&theme=dark&perline=5" width="100%" style="display:block;max-width:100%;" title="Postman · PowerShell · LaTeX · Git · GitHub" alt="Tools"/></td>
 </tr>
+</tbody>
 </table>
 
 ---
