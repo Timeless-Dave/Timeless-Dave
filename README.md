@@ -124,15 +124,15 @@
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td align="center" width="50%" valign="top">
-<img src="https://github-readme-stats.vercel.app/api?username=Timeless-Dave&show_icons=true&hide_border=true&include_all_commits=true&count_private=true&bg_color=0d1117&title_color=a78bfa&icon_color=a78bfa&text_color=c9d1d9&ring_color=a78bfa" width="100%"/>
+<img src="https://github-readme-stats.vercel.app/api?username=Timeless-Dave&show_icons=true&hide_border=true&bg_color=0d1117&title_color=a78bfa&icon_color=a78bfa&text_color=c9d1d9&ring_color=a78bfa" width="100%"/>
 </td>
 <td align="center" width="50%" rowspan="2" valign="middle">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Timeless-Dave&hide_border=true&include_all_commits=true&count_private=true&layout=donut&bg_color=0d1117&title_color=a78bfa&text_color=c9d1d9&langs_count=8" width="100%"/>
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Timeless-Dave&hide_border=true&count_private=true&layout=donut&bg_color=0d1117&title_color=a78bfa&text_color=c9d1d9&langs_count=8" width="100%"/>
 </td>
 </tr>
 <tr>
 <td align="center" width="50%" valign="bottom">
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=Timeless-Dave&hide_border=true&background=0d1117&ring=a78bfa&fire=f97316&currStreakLabel=a78bfa&sideNums=c9d1d9&sideLabels=c9d1d9&dates=666666&stroke=0d1117" width="100%"/>
+<img src="https://streak-stats.demolab.com/?user=Timeless-Dave&hide_border=true&background=0d1117&ring=a78bfa&fire=f97316&currStreakLabel=a78bfa&sideNums=c9d1d9&sideLabels=c9d1d9&dates=666666&stroke=0d1117" width="100%"/>
 </td>
 </tr>
 <tr>
