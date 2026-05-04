@@ -124,10 +124,10 @@
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td align="center" width="50%" valign="top">
-<img src="https://github-readme-stats.vercel.app/api?username=Timeless-Dave&show_icons=true&hide_border=true&bg_color=0d1117&title_color=a78bfa&icon_color=a78bfa&text_color=c9d1d9&ring_color=a78bfa" width="100%"/>
+<img src="https://github-readme-stats.vercel.app/api?username=Timeless-Dave&show_icons=true&hide_border=true&bg_color=0d1117&title_color=a78bfa&icon_color=a78bfa&text_color=c9d1d9&ring_color=a78bfa&cache_seconds=86400" width="100%"/>
 </td>
 <td align="center" width="50%" rowspan="2" valign="middle">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Timeless-Dave&hide_border=true&count_private=true&layout=donut&bg_color=0d1117&title_color=a78bfa&text_color=c9d1d9&langs_count=8" width="100%"/>
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Timeless-Dave&hide_border=true&count_private=true&layout=donut&bg_color=0d1117&title_color=a78bfa&text_color=c9d1d9&langs_count=8&cache_seconds=86400" width="100%"/>
 </td>
 </tr>
 <tr>
