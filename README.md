@@ -121,23 +121,25 @@
 
 ## 📊 GitHub Analytics
 
+<sub>Stats, streak, activity graph, and trophies sync every 6 hours and on every push (any branch).</sub>
+
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td align="center" width="50%" valign="top">
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Timeless-Dave&theme=tokyonight" width="100%"/>
+<img src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/analytics/stats.svg" width="100%" alt="GitHub stats"/>
 </td>
 <td align="center" width="50%" rowspan="2" valign="middle">
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Timeless-Dave&theme=tokyonight" width="100%"/>
+<img src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/analytics/repos-per-language.svg" width="100%" alt="Repos per language"/>
 </td>
 </tr>
 <tr>
 <td align="center" width="50%" valign="bottom">
-<img src="https://streak-stats.demolab.com/?user=Timeless-Dave&hide_border=true&background=0d1117&ring=a78bfa&fire=f97316&currStreakLabel=a78bfa&sideNums=c9d1d9&sideLabels=c9d1d9&dates=666666&stroke=0d1117" width="100%"/>
+<img src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/analytics/streak.svg" width="100%" alt="GitHub contribution streak"/>
 </td>
 </tr>
 <tr>
 <td colspan="2" align="center">
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=Timeless-Dave&bg_color=0d1117&color=a78bfa&line=a78bfa&point=ffffff&area=true&area_color=1a0e3340&hide_border=true&custom_title=Contribution%20Activity" width="100%"/>
+<img src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/analytics/activity-graph.svg" width="100%" alt="Contribution activity graph"/>
 </td>
 </tr>
 </table>
@@ -148,7 +150,7 @@
 
 <div align="center">
 
-<img src="https://github-profile-trophy.vercel.app/?username=Timeless-Dave&theme=tokyonight&no-frame=true&no-bg=true&margin-w=4&column=7" width="100%" title="Hover each trophy to see details"/>
+<img src="https://raw.githubusercontent.com/Timeless-Dave/Timeless-Dave/output/analytics/trophies.svg" width="100%" alt="GitHub trophies" title="Hover each trophy to see details"/>
 
 <br/><br/>
 

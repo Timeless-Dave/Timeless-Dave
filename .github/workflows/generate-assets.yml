@@ -2,12 +2,12 @@ name: Generate Profile Assets
 
 on:
   schedule:
-    # Refresh snake + 3D calendar from live GitHub contribution data.
+    # Refresh snake, 3D calendar, and analytics from live GitHub data.
     - cron: "0 */6 * * *"
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches-ignore:
+      - output
 
 concurrency:
   group: profile-assets
@@ -19,7 +19,7 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - uses: actions/checkout@v4
@@ -41,6 +41,50 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: ${{ github.repository_owner }}
 
+      # ── Analytics cards (cached on output branch — avoids camo/proxy failures) ─
+      - name: Fetch live analytics images
+        env:
+          USERNAME: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          mkdir -p dist/analytics
+
+          fetch() {
+            local url="$1"
+            local out="$2"
+            echo "Fetching $out"
+            curl -fsSL --retry 3 --retry-delay 5 --max-time 60 \
+              -A "Timeless-Dave-profile-assets" \
+              "$url" -o "$out"
+            if [ ! -s "$out" ]; then
+              echo "Empty response for $out"
+              exit 1
+            fi
+          }
+
+          fetch \
+            "https://github-profile-summary-cards.vercel.app/api/cards/stats?username=${USERNAME}&theme=tokyonight" \
+            "dist/analytics/stats.svg"
+
+          fetch \
+            "https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=${USERNAME}&theme=tokyonight" \
+            "dist/analytics/repos-per-language.svg"
+
+          fetch \
+            "https://streak-stats.demolab.com/?user=${USERNAME}&hide_border=true&background=0d1117&ring=a78bfa&fire=f97316&currStreakLabel=a78bfa&sideNums=c9d1d9&sideLabels=c9d1d9&dates=8b949e&stroke=0d1117" \
+            "dist/analytics/streak.svg"
+
+          fetch \
+            "https://github-readme-activity-graph.vercel.app/graph?username=${USERNAME}&bg_color=0d1117&color=a78bfa&line=a78bfa&point=ffffff&area=true&area_color=1a0e3340&hide_border=true&custom_title=Contribution%20Activity" \
+            "dist/analytics/activity-graph.svg"
+
+          fetch \
+            "https://github-profile-trophy.vercel.app/?username=${USERNAME}&theme=tokyonight&no-frame=true&margin-w=4&column=4" \
+            "dist/analytics/trophies.svg"
+
+          echo "Analytics assets:"
+          ls -la dist/analytics/
+
       # ── Collect into dist/ ────────────────────────────────────────────────
       - name: Collect all output files
         run: |
@@ -56,7 +100,6 @@ jobs:
           echo "Snake files:"
           ls -la dist/*.svg 2>/dev/null || { echo "No snake SVGs generated"; exit 1; }
 
-          # Basic sanity check so we never publish an empty/broken snake.
           for file in dist/github-contribution-grid-snake.svg dist/github-contribution-grid-snake-dark.svg; do
             if [ ! -s "$file" ]; then
               echo "Snake file is empty: $file"
@@ -64,6 +107,13 @@ jobs:
             fi
             if ! grep -q "<svg" "$file"; then
               echo "Snake file is not valid SVG: $file"
+              exit 1
+            fi
+          done
+
+          for file in dist/analytics/*.svg; do
+            if [ ! -s "$file" ]; then
+              echo "Analytics file is empty: $file"
               exit 1
             fi
           done
@@ -78,4 +128,4 @@ jobs:
           force_orphan: true
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
-          commit_message: "chore: sync contribution snake and profile assets"
+          commit_message: "chore: sync contribution snake, analytics, and profile assets"
