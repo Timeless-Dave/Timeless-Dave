@@ -42,6 +42,15 @@ jobs:
           USERNAME: ${{ github.repository_owner }}
 
       # ── Analytics cards (cached on output branch — avoids camo/proxy failures) ─
+      - name: Generate stats card from GitHub API
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+          OUTPUT_PATH: dist/analytics/stats.svg
+        run: |
+          mkdir -p dist/analytics
+          python3 .github/scripts/generate-stats.py
+
       - name: Generate activity graph from GitHub API
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -77,10 +86,6 @@ jobs:
               exit 1
             fi
           }
-
-          fetch \
-            "https://github-profile-summary-cards.vercel.app/api/cards/stats?username=${USERNAME}&theme=tokyonight" \
-            "dist/analytics/stats.svg"
 
           fetch \
             "https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=${USERNAME}&theme=tokyonight" \
