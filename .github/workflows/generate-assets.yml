@@ -51,6 +51,13 @@ jobs:
           mkdir -p dist/analytics
           python3 .github/scripts/generate-activity-graph.py
 
+      - name: Generate trophies from GitHub API
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+          OUTPUT_PATH: dist/analytics/trophies.svg
+        run: python3 .github/scripts/generate-trophies.py
+
       - name: Fetch live analytics images
         env:
           USERNAME: ${{ github.repository_owner }}
@@ -82,10 +89,6 @@ jobs:
           fetch \
             "https://streak-stats.demolab.com/?user=${USERNAME}&hide_border=true&background=0d1117&ring=a78bfa&fire=f97316&currStreakLabel=a78bfa&sideNums=c9d1d9&sideLabels=c9d1d9&dates=8b949e&stroke=0d1117" \
             "dist/analytics/streak.svg"
-
-          fetch \
-            "https://github-profile-trophy.vercel.app/?username=${USERNAME}&theme=tokyonight&no-frame=true&margin-w=4&column=4" \
-            "dist/analytics/trophies.svg"
 
           echo "Analytics assets:"
           ls -la dist/analytics/
