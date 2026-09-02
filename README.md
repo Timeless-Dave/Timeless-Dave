@@ -13,7 +13,7 @@
 <details>
 <summary><b>📄 Resume</b> &nbsp;▼</summary>
 
-[![View in browser](https://img.shields.io/badge/View%20in%20browser-0d1117?style=for-the-badge&logo=googledocs&logoColor=white)](https://github.com/Timeless-Dave/Timeless-Dave/blob/main/docs/0001%20David%20Adedeji%20Resume.pdf)&nbsp;[![Download PDF](https://img.shields.io/badge/Download%20PDF-a78bfa?style=for-the-badge&logo=googledrive&logoColor=white)](https://github.com/Timeless-Dave/Timeless-Dave/raw/main/docs/0001%20David%20Adedeji%20Resume.pdf)
+[![View in browser](https://img.shields.io/badge/View%20in%20browser-0d1117?style=for-the-badge&logo=googledocs&logoColor=white)](https://github.com/Timeless-Dave/Timeless-Dave/blob/main/docs/001_David_Adedeji_SWE_resume.pdf)&nbsp;[![Download PDF](https://img.shields.io/badge/Download%20PDF-a78bfa?style=for-the-badge&logo=googledrive&logoColor=white)](https://github.com/Timeless-Dave/Timeless-Dave/raw/main/docs/001_David_Adedeji_SWE_resume.pdf)
 
 </details>
 
