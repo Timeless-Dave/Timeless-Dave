@@ -2,11 +2,16 @@ name: Generate Profile Assets
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    # Refresh snake + 3D calendar from live GitHub contribution data.
+    - cron: "0 */6 * * *"
   workflow_dispatch:
   push:
     branches:
       - main
+
+concurrency:
+  group: profile-assets
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -19,11 +24,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ── Snake ─────────────────────────────────────────────────────────────
-      - name: Generate snake SVGs
+      # ── Snake (reads live contribution grid) ──────────────────────────────
+      - name: Generate snake SVGs from contribution graph
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: ${{ github.repository_owner }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           outputs: |
             dist/github-contribution-grid-snake.svg?color_snake=%23e11d48&color_dots[0]=%23ebedf0&color_dots[1]=%23c6e48b&color_dots[2]=%237bc96f&color_dots[3]=%23239a3b&color_dots[4]=%23196127
             dist/github-contribution-grid-snake-dark.svg?color_snake=%23f97316&color_dots[0]=%230d1117&color_dots[1]=%230e4429&color_dots[2]=%23006d32&color_dots[3]=%2326a641&color_dots[4]=%2339d353
@@ -46,10 +52,23 @@ jobs:
           else
             echo "No 3D SVG files found in profile-3d-contrib/"
           fi
-          echo "Snake files:"
-          ls dist/*.svg 2>/dev/null || echo "No snake files"
 
-      # ── Single push to output branch ─────────────────────────────────────
+          echo "Snake files:"
+          ls -la dist/*.svg 2>/dev/null || { echo "No snake SVGs generated"; exit 1; }
+
+          # Basic sanity check so we never publish an empty/broken snake.
+          for file in dist/github-contribution-grid-snake.svg dist/github-contribution-grid-snake-dark.svg; do
+            if [ ! -s "$file" ]; then
+              echo "Snake file is empty: $file"
+              exit 1
+            fi
+            if ! grep -q "<svg" "$file"; then
+              echo "Snake file is not valid SVG: $file"
+              exit 1
+            fi
+          done
+
+      # ── Push to output branch ─────────────────────────────────────────────
       - name: Deploy everything to output branch
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -59,4 +78,4 @@ jobs:
           force_orphan: true
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
-          commit_message: "chore: update profile assets"
+          commit_message: "chore: sync contribution snake and profile assets"
