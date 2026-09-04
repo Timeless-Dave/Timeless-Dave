@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
-"""Generate contribution-grid snake SVG that spells words before clearing them."""
+"""Generate contribution-grid snake SVG that spells words before clearing them.
+
+Movement matches Platane/snk: one cell step at a time on a continuous path,
+with a 4-segment body trailing behind the head.
+"""
 
 from __future__ import annotations
 
 import os
-from typing import Dict, List, Set, Tuple
+from collections import deque
+from typing import Dict, List, Optional, Set, Tuple
 
 OUTPUT_LIGHT = os.environ.get("OUTPUT_LIGHT", "dist/github-contribution-grid-snake.svg")
 OUTPUT_DARK = os.environ.get("OUTPUT_DARK", "dist/github-contribution-grid-snake-dark.svg")
 
-# 5-row bitmap font (1 = filled cell)
 FONT: Dict[str, List[str]] = {
     "T": ["11111", "00100", "00100", "00100", "00100"],
     "I": ["11111", "00100", "00100", "00100", "11111"],
@@ -30,25 +34,28 @@ CELL = 12
 STEP = 16
 ORIGIN_X = 2
 ORIGIN_Y = 2
-DURATION_MS = 48000
-# Per-scenario timeline fractions within each half of the loop
-HOLD_BEFORE = 0.04
-HOLD_VISIBLE = 0.22
-EAT_PORTION = 0.58
-HOLD_AFTER = 0.08
+DURATION_MS = 60000
+SNAKE_LEN = 4
+
+# Timeline within each half of the loop
+HOLD_BEFORE = 0.06
+HOLD_VISIBLE = 0.20
+EAT_PORTION = 0.60
 
 
-def cell_center(col: int, row: int) -> Tuple[float, float]:
-    x = ORIGIN_X + col * STEP + CELL / 2
-    y = ORIGIN_Y + row * STEP + CELL / 2
-    return x, y
+Point = Tuple[int, int]
 
 
-def word_cells(word: str) -> Set[Tuple[int, int]]:
+def snake_translate(col: int, row: int) -> str:
+    """Match Platane/snk positioning: 16px grid, snake rects anchored near origin."""
+    return f"translate({col * STEP}px,{row * STEP - 16}px)"
+
+
+def word_cells(word: str) -> Set[Point]:
     width = len(word) * 6 - 1
     start_col = max(0, (COLS - width) // 2)
     start_row = 1
-    cells: Set[Tuple[int, int]] = set()
+    cells: Set[Point] = set()
     cursor = start_col
     for char in word:
         bitmap = FONT.get(char, FONT.get(char.upper(), ["00000"] * 5))
@@ -63,17 +70,69 @@ def word_cells(word: str) -> Set[Tuple[int, int]]:
     return cells
 
 
-def snake_eat_order(cells: Set[Tuple[int, int]]) -> List[Tuple[int, int]]:
+def letter_visit_order(cells: Set[Point]) -> List[Point]:
+    """Serpentine visit order through letter cells only."""
     rows: Dict[int, List[int]] = {}
     for col, row in cells:
         rows.setdefault(row, []).append(col)
-    path: List[Tuple[int, int]] = []
+    order: List[Point] = []
     for row in sorted(rows):
         cols = sorted(rows[row])
         if row % 2 == 0:
-            path.extend((col, row) for col in cols)
+            order.extend((col, row) for col in cols)
         else:
-            path.extend((col, row) for col in reversed(cols))
+            order.extend((col, row) for col in reversed(cols))
+    return order
+
+
+def neighbors(col: int, row: int) -> List[Point]:
+    opts = [(col + 1, row), (col - 1, row), (col, row + 1), (col, row - 1)]
+    return [(c, r) for c, r in opts if 0 <= c < COLS and 0 <= r < ROWS]
+
+
+def bfs_path(start: Point, goal: Point) -> List[Point]:
+    """Shortest 4-connected path from start to goal (inclusive)."""
+    if start == goal:
+        return [start]
+    queue: deque[Point] = deque([start])
+    came_from: Dict[Point, Optional[Point]] = {start: None}
+    while queue:
+        current = queue.popleft()
+        for nxt in neighbors(*current):
+            if nxt in came_from:
+                continue
+            came_from[nxt] = current
+            if nxt == goal:
+                queue.clear()
+                break
+            queue.append(nxt)
+    if goal not in came_from:
+        # Fallback: jump directly (shouldn't happen on open grid)
+        return [start, goal]
+    path: List[Point] = []
+    node: Optional[Point] = goal
+    while node is not None:
+        path.append(node)
+        node = came_from[node]
+    path.reverse()
+    return path
+
+
+def continuous_path(letter_order: List[Point]) -> List[Point]:
+    """Connect letter targets with adjacent steps so the snake never teleports."""
+    if not letter_order:
+        return []
+    # Enter from one cell left of the first letter for a clean approach.
+    first = letter_order[0]
+    entry = (max(0, first[0] - 1), first[1])
+    path: List[Point] = []
+    waypoints = [entry, *letter_order]
+    for i in range(len(waypoints) - 1):
+        segment = bfs_path(waypoints[i], waypoints[i + 1])
+        if path and segment and path[-1] == segment[0]:
+            path.extend(segment[1:])
+        else:
+            path.extend(segment)
     return path
 
 
@@ -82,16 +141,23 @@ def build_scenarios() -> List[dict]:
     span = 1.0 / len(SCENARIOS)
     for index, word in enumerate(SCENARIOS):
         base = index * span
-        cells = word_cells(word)
-        path = snake_eat_order(cells)
+        letters = word_cells(word)
+        order = letter_visit_order(letters)
+        move = continuous_path(order)
+        # Map each letter cell -> first index on continuous path where head eats it
+        eat_index: Dict[Point, int] = {}
+        for i, cell in enumerate(move):
+            if cell in letters and cell not in eat_index:
+                eat_index[cell] = i
         show_start = base + span * HOLD_BEFORE
         eat_start = show_start + span * HOLD_VISIBLE
         eat_end = eat_start + span * EAT_PORTION
         scenarios.append(
             {
                 "word": word,
-                "cells": cells,
-                "path": path,
+                "letters": letters,
+                "move": move,
+                "eat_index": eat_index,
                 "show_start": show_start,
                 "eat_start": eat_start,
                 "eat_end": eat_end,
@@ -104,26 +170,23 @@ def pct(value: float) -> str:
     return f"{max(0.0, min(value, 1.0)) * 100:.2f}%"
 
 
-def eat_time_for_cell(scenario: dict, col: int, row: int) -> float:
-    path = scenario["path"]
-    try:
-        index = path.index((col, row))
-    except ValueError:
-        return scenario["eat_end"]
-    n = max(len(path) - 1, 1)
-    return scenario["eat_start"] + (index / n) * (scenario["eat_end"] - scenario["eat_start"])
+def time_at_step(scenario: dict, step: int) -> float:
+    move = scenario["move"]
+    n = max(len(move) - 1, 1)
+    return scenario["eat_start"] + (step / n) * (scenario["eat_end"] - scenario["eat_start"])
 
 
 def build_cell_keyframes(col: int, row: int, scenarios: List[dict]) -> str | None:
-    """One animation per cell covering every scenario that uses it."""
     events: List[Tuple[float, str]] = [(0.0, "empty")]
     used = False
     for scenario in scenarios:
-        if (col, row) not in scenario["cells"]:
+        cell = (col, row)
+        if cell not in scenario["letters"]:
             continue
         used = True
         show = scenario["show_start"]
-        eaten = eat_time_for_cell(scenario, col, row)
+        step = scenario["eat_index"].get(cell, len(scenario["move"]) - 1)
+        eaten = time_at_step(scenario, step)
         events.append((show, "green"))
         events.append((eaten, "empty"))
     if not used:
@@ -132,54 +195,48 @@ def build_cell_keyframes(col: int, row: int, scenarios: List[dict]) -> str | Non
     events.append((1.0, "empty"))
     events.sort(key=lambda item: item[0])
 
-    # Collapse consecutive same-state events, keep ranges for CSS.
     parts: List[str] = []
-    i = 0
-    while i < len(events) - 1:
+    for i in range(len(events) - 1):
         t0, state = events[i]
         t1 = events[i + 1][0]
+        if t1 <= t0:
+            continue
         fill = "var(--c2)" if state == "green" else "var(--ce)"
-        # Skip zero-length ranges
-        if t1 > t0:
-            parts.append(f"{pct(t0)},{pct(t1)}{{fill:{fill}}}")
-        i += 1
+        parts.append(f"{pct(t0)},{pct(t1)}{{fill:{fill}}}")
     return "".join(parts)
 
 
-def build_snake_frames(scenarios: List[dict], offset: int = 0) -> str:
-    """Build keyframes for one snake segment, lagged by `offset` cells behind the head.
-
-    Important: keyframe blocks must be concatenated WITHOUT commas between them.
-    Platane/snk style: `0%{...}10%{...}` not `0%{...},10%{...}`.
-    """
-    frames: List[str] = []
-    frames.append("0%{transform:translate(-32px,-32px)}")
+def build_snake_frames(scenarios: List[dict], offset: int) -> str:
+    """Platane/snk-style: same continuous path, body segments lag by `offset` steps."""
+    frames: List[str] = [f"0%{{transform:{snake_translate(-2, -1)}}}"]
 
     for scenario in scenarios:
-        path = scenario["path"]
-        if not path:
+        move = scenario["move"]
+        if not move:
             continue
         eat_start = scenario["eat_start"]
         eat_end = scenario["eat_end"]
-        eat_span = eat_end - eat_start
-        n = len(path)
-        start_idx = min(offset, n - 1)
-        start_t = eat_start + (start_idx / max(n - 1, 1)) * eat_span
-        sx, sy = cell_center(*path[start_idx])
+        n = max(len(move) - 1, 1)
 
-        frames.append(f"{pct(max(0.0, start_t - 0.0002))}{{transform:translate(-32px,-32px)}}")
-        frames.append(f"{pct(start_t)}{{transform:translate({sx - 8:.1f}px,{sy - 8:.1f}px)}}")
+        # Stay parked until this scenario's eat window (lagged for body).
+        park = snake_translate(-2, -1)
+        first_step = min(offset, len(move) - 1)
+        first_t = eat_start + (first_step / n) * (eat_end - eat_start)
+        frames.append(f"{pct(max(0.0, first_t - 0.0001))}{{transform:{park}}}")
 
-        for i in range(start_idx, n):
-            t = eat_start + (i / max(n - 1, 1)) * eat_span
-            x, y = cell_center(*path[i])
-            frames.append(f"{pct(t)}{{transform:translate({x - 8:.1f}px,{y - 8:.1f}px)}}")
+        for step in range(first_step, len(move)):
+            # Body follows the head: at head-step `step`, this segment is at step-offset
+            pos_index = max(0, step - offset)
+            col, row = move[pos_index]
+            t = eat_start + (step / n) * (eat_end - eat_start)
+            frames.append(f"{pct(t)}{{transform:{snake_translate(col, row)}}}")
 
-        lx, ly = cell_center(*path[-1])
-        frames.append(f"{pct(eat_end)}{{transform:translate({lx - 8:.1f}px,{ly - 8:.1f}px)}}")
-        frames.append(f"{pct(min(1.0, eat_end + 0.002))}{{transform:translate(-32px,-32px)}}")
+        # Hold last pose briefly, then park for the next word
+        last_col, last_row = move[max(0, len(move) - 1 - offset)]
+        frames.append(f"{pct(eat_end)}{{transform:{snake_translate(last_col, last_row)}}}")
+        frames.append(f"{pct(min(1.0, eat_end + 0.002))}{{transform:{park}}}")
 
-    frames.append("100%{transform:translate(-32px,-32px)}")
+    frames.append(f"100%{{transform:{snake_translate(-2, -1)}}}")
     return "".join(frames)
 
 
@@ -205,7 +262,6 @@ def build_svg(theme: str) -> str:
 
     rects: List[str] = []
     anim_index = 0
-
     for row in range(ROWS):
         for col in range(COLS):
             x = ORIGIN_X + col * STEP
@@ -214,24 +270,26 @@ def build_svg(theme: str) -> str:
             if keyframes is None:
                 rects.append(f'<rect class="c" x="{x}" y="{y}" rx="2" ry="2"/>')
                 continue
-            anim_name = f"a{anim_index}"
+            name = f"a{anim_index}"
             anim_index += 1
-            css_parts.append(f"@keyframes {anim_name}{{{keyframes}}}")
-            css_parts.append(f".c.{anim_name}{{animation-name:{anim_name}}}")
-            rects.append(f'<rect class="c {anim_name}" x="{x}" y="{y}" rx="2" ry="2"/>')
+            css_parts.append(f"@keyframes {name}{{{keyframes}}}")
+            css_parts.append(f".c.{name}{{animation-name:{name}}}")
+            rects.append(f'<rect class="c {name}" x="{x}" y="{y}" rx="2" ry="2"/>')
 
-    snake_markup: List[str] = []
+    # Same segment geometry as Platane/snk — layered so the body reads as one snake.
     sizes = [
         (0.8, 14.4, 4.5),
         (1.8, 12.3, 4.1),
         (2.6, 10.8, 3.6),
         (3.0, 9.9, 3.3),
     ]
+    snake_markup: List[str] = []
+    park = snake_translate(-2, -1)
     for offset, (inset, size, radius) in enumerate(sizes):
-        frames = build_snake_frames(scenarios, offset=offset)
         name = f"s{offset}"
+        frames = build_snake_frames(scenarios, offset=offset)
         css_parts.append(f"@keyframes {name}{{{frames}}}")
-        css_parts.append(f".s.{name}{{animation-name:{name};transform:translate(-32px,-32px)}}")
+        css_parts.append(f".s.{name}{{animation-name:{name};transform:{park}}}")
         snake_markup.append(
             f'<rect class="s {name}" x="{inset}" y="{inset}" '
             f'width="{size}" height="{size}" rx="{radius}" ry="{radius}"/>'
@@ -259,8 +317,16 @@ def main() -> int:
         handle.write(build_svg("dark"))
     print(f"Wrote {OUTPUT_LIGHT} and {OUTPUT_DARK}")
     for scenario in build_scenarios():
+        move = scenario["move"]
+        jumps = 0
+        for i in range(1, len(move)):
+            c0, r0 = move[i - 1]
+            c1, r1 = move[i]
+            if abs(c0 - c1) + abs(r0 - r1) != 1:
+                jumps += 1
         print(
-            f"  {scenario['word']}: {len(scenario['cells'])} cells | "
+            f"  {scenario['word']}: letters={len(scenario['letters'])} "
+            f"path={len(move)} jumps={jumps} "
             f"show={scenario['show_start']:.2f} eat={scenario['eat_start']:.2f}-{scenario['eat_end']:.2f}"
         )
     return 0
