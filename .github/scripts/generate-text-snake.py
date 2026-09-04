@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import os
-import sys
 from typing import Dict, List, Set, Tuple
 
 OUTPUT_LIGHT = os.environ.get("OUTPUT_LIGHT", "dist/github-contribution-grid-snake.svg")
@@ -17,7 +16,7 @@ FONT: Dict[str, List[str]] = {
     "M": ["10001", "11011", "10101", "10001", "10001"],
     "E": ["11111", "10000", "11110", "10000", "11111"],
     "L": ["10000", "10000", "10000", "10000", "11111"],
-    "S": ["01110", "10000", "01100", "00010", "11100"],
+    "S": ["01111", "10000", "01110", "00001", "11110"],
     "i": ["00100", "00000", "01100", "00100", "01110"],
     "C": ["01110", "10001", "10000", "10001", "01110"],
     "O": ["01110", "10001", "10001", "10001", "01110"],
@@ -31,11 +30,13 @@ CELL = 12
 STEP = 16
 ORIGIN_X = 2
 ORIGIN_Y = 2
-DURATION_MS = 72000
-PAUSE_START = 0.06
-EAT_START = 0.10
-EAT_END = 0.44
-SCENARIO_GAP = 0.04
+DURATION_MS = 60000
+SNAKE_LEN = 4
+# Per-scenario timeline fractions within each half of the loop
+HOLD_BEFORE = 0.08   # blank pause before word appears
+HOLD_VISIBLE = 0.18  # word fully visible before snake starts eating
+EAT_PORTION = 0.58   # time spent eating through the word
+HOLD_AFTER = 0.08    # blank pause after clear
 
 
 def cell_center(col: int, row: int) -> Tuple[float, float]:
@@ -64,13 +65,13 @@ def word_cells(word: str) -> Set[Tuple[int, int]]:
 
 
 def snake_eat_order(cells: Set[Tuple[int, int]]) -> List[Tuple[int, int]]:
-    ordered = sorted(cells, key=lambda c: (c[1], c[0]))
+    """Serpentine left→right / right→left through letter cells."""
     rows: Dict[int, List[int]] = {}
-    for col, row in ordered:
+    for col, row in cells:
         rows.setdefault(row, []).append(col)
     path: List[Tuple[int, int]] = []
     for row in sorted(rows):
-        cols = rows[row]
+        cols = sorted(rows[row])
         if row % 2 == 0:
             path.extend((col, row) for col in cols)
         else:
@@ -78,27 +79,79 @@ def snake_eat_order(cells: Set[Tuple[int, int]]) -> List[Tuple[int, int]]:
     return path
 
 
-def build_scenario_windows() -> List[dict]:
-    windows = []
+def build_scenarios() -> List[dict]:
+    scenarios = []
     span = 1.0 / len(SCENARIOS)
     for index, word in enumerate(SCENARIOS):
         base = index * span
-        windows.append(
+        cells = word_cells(word)
+        path = snake_eat_order(cells)
+        show_start = base + span * HOLD_BEFORE
+        eat_start = show_start + span * HOLD_VISIBLE
+        eat_end = eat_start + span * EAT_PORTION
+        hide_end = min(base + span - span * HOLD_AFTER * 0.25, 0.999)
+        scenarios.append(
             {
                 "word": word,
-                "cells": word_cells(word),
-                "path": snake_eat_order(word_cells(word)),
-                "show_start": base + PAUSE_START,
-                "eat_start": base + EAT_START,
-                "eat_end": base + EAT_END,
-                "hide_end": base + span - SCENARIO_GAP,
+                "cells": cells,
+                "path": path,
+                "show_start": show_start,
+                "eat_start": eat_start,
+                "eat_end": eat_end,
+                "hide_end": hide_end,
             }
         )
-    return windows
+    return scenarios
 
 
 def pct(value: float) -> str:
-    return f"{value * 100:.2f}%"
+    return f"{max(0.0, min(value, 1.0)) * 100:.2f}%"
+
+
+def eat_time_for_cell(scenario: dict, col: int, row: int) -> float:
+    path = scenario["path"]
+    try:
+        index = path.index((col, row))
+    except ValueError:
+        return scenario["eat_end"]
+    n = max(len(path) - 1, 1)
+    return scenario["eat_start"] + (index / n) * (scenario["eat_end"] - scenario["eat_start"])
+
+
+def build_snake_frames(scenarios: List[dict], offset: int = 0) -> str:
+    """Build keyframes for one snake segment, lagged by `offset` cells behind the head."""
+    frames: List[str] = []
+    # Off-screen while idle
+    frames.append("0%{transform:translate(-24px,-24px)}")
+
+    for scenario in scenarios:
+        path = scenario["path"]
+        if not path:
+            continue
+        eat_start = scenario["eat_start"]
+        eat_end = scenario["eat_end"]
+        eat_span = eat_end - eat_start
+        n = len(path)
+
+        # Appear at first cell (or lagged start)
+        start_idx = min(offset, n - 1)
+        start_t = eat_start + (start_idx / max(n - 1, 1)) * eat_span
+        sx, sy = cell_center(*path[start_idx])
+        frames.append(f"{pct(start_t - 0.0001)}{{transform:translate(-24px,-24px)}}")
+        frames.append(f"{pct(start_t)}{{transform:translate({sx - 8:.1f}px,{sy - 8:.1f}px)}}")
+
+        for i in range(start_idx, n):
+            t = eat_start + (i / max(n - 1, 1)) * eat_span
+            x, y = cell_center(*path[i])
+            frames.append(f"{pct(t)}{{transform:translate({x - 8:.1f}px,{y - 8:.1f}px)}}")
+
+        # Hide after finishing this word
+        lx, ly = cell_center(*path[-1])
+        frames.append(f"{pct(eat_end)}{{transform:translate({lx - 8:.1f}px,{ly - 8:.1f}px)}}")
+        frames.append(f"{pct(eat_end + 0.001)}{{transform:translate(-24px,-24px)}}")
+
+    frames.append("100%{transform:translate(-24px,-24px)}")
+    return ",".join(frames)
 
 
 def build_svg(theme: str) -> str:
@@ -107,17 +160,14 @@ def build_svg(theme: str) -> str:
     else:
         vars_css = "--cb:#1b1f230a;--cs:#e11d48;--ce:#ebedf0;--c2:#40c463;"
 
-    scenarios = build_scenario_windows()
+    scenarios = build_scenarios()
     css_parts: List[str] = [
         f":root{{{vars_css}}}",
         (
             ".c{shape-rendering:geometricPrecision;fill:var(--ce);stroke-width:1px;"
             "stroke:var(--cb);width:12px;height:12px}"
         ),
-        (
-            f".s{{shape-rendering:geometricPrecision;fill:var(--cs);"
-            f"animation:snakeMove {DURATION_MS}ms linear infinite}}"
-        ),
+        ".s{shape-rendering:geometricPrecision;fill:var(--cs)}",
     ]
 
     rects: List[str] = []
@@ -135,15 +185,13 @@ def build_svg(theme: str) -> str:
                 anim_index += 1
                 classes += f" {anim_name}"
                 show = scenario["show_start"]
-                eat_start = scenario["eat_start"]
-                eat_end = scenario["eat_end"]
-                hide = scenario["hide_end"]
+                eaten = eat_time_for_cell(scenario, col, row)
+                # Stay green until this cell is eaten, then clear permanently for this scenario.
                 css_parts.append(
                     f"@keyframes {anim_name}{{"
                     f"0%,{pct(show)}{{fill:var(--ce)}}"
-                    f"{pct(show)},{pct(eat_start)}{{fill:var(--c2)}}"
-                    f"{pct(eat_end)},{pct(hide)}{{fill:var(--ce)}}"
-                    f"{pct(hide)},100%{{fill:var(--ce)}}"
+                    f"{pct(show)},{pct(eaten)}{{fill:var(--c2)}}"
+                    f"{pct(eaten + 0.0005)},100%{{fill:var(--ce)}}"
                     "}}"
                 )
                 css_parts.append(
@@ -151,23 +199,24 @@ def build_svg(theme: str) -> str:
                 )
             rects.append(f'<rect class="{classes}" x="{x}" y="{y}" rx="2" ry="2"/>')
 
-    combined_frames: List[str] = ["0%,100%{transform:translate(-20px,-20px)}"]
-    for scenario in scenarios:
-        path = scenario["path"]
-        if not path:
-            continue
-        eat_start = scenario["eat_start"]
-        eat_end = scenario["eat_end"]
-        eat_span = eat_end - eat_start
-        n = len(path)
-        for i, (col, row) in enumerate(path):
-            t = eat_start + (i / max(n - 1, 1)) * eat_span
-            x, y = cell_center(col, row)
-            combined_frames.append(
-                f"{pct(t)}{{transform:translate({x - 8:.1f}px,{y - 8:.1f}px)}}"
-            )
-
-    css_parts.append(f"@keyframes snakeMove{{{','.join(combined_frames)}}}")
+    snake_markup: List[str] = []
+    sizes = [
+        (0.8, 14.4, 4.5),
+        (1.8, 12.3, 4.1),
+        (2.6, 10.8, 3.6),
+        (3.0, 9.9, 3.3),
+    ]
+    for offset, (inset, size, radius) in enumerate(sizes):
+        frames = build_snake_frames(scenarios, offset=offset)
+        name = f"snake{offset}"
+        css_parts.append(f"@keyframes {name}{{{frames}}}")
+        css_parts.append(
+            f".{name}{{animation:{name} {DURATION_MS}ms linear infinite}}"
+        )
+        snake_markup.append(
+            f'<rect class="s {name}" x="{inset}" y="{inset}" '
+            f'width="{size}" height="{size}" rx="{radius}" ry="{radius}"/>'
+        )
 
     width = ORIGIN_X + COLS * STEP + 2
     height = ORIGIN_Y + ROWS * STEP + 2
@@ -175,26 +224,26 @@ def build_svg(theme: str) -> str:
     return (
         f'<svg viewBox="-16 -32 {width + 16} {height + 32}" width="{width}" height="{height}" '
         f'xmlns="http://www.w3.org/2000/svg">'
-        f'<desc>Timeless text snake — Timeless / iCODE</desc>'
+        f"<desc>Timeless text snake — Timeless / iCODE</desc>"
         f'<style>{"".join(css_parts)}</style>'
         f'{"".join(rects)}'
-        '<rect class="s" x="0.8" y="0.8" width="14.4" height="14.4" rx="4.5" ry="4.5"/>'
-        '<rect class="s" x="1.8" y="1.8" width="12.3" height="12.3" rx="4.1" ry="4.1"/>'
-        '<rect class="s" x="2.6" y="2.6" width="10.8" height="10.8" rx="3.6" ry="3.6"/>'
-        '<rect class="s" x="3.0" y="3.0" width="9.9" height="9.9" rx="3.3" ry="3.3"/>'
+        f'{"".join(snake_markup)}'
         "</svg>"
     )
 
 
 def main() -> int:
     os.makedirs(os.path.dirname(OUTPUT_LIGHT) or ".", exist_ok=True)
-    with open(OUTPUT_LIGHT, "w", encoding="utf-8") as f:
-        f.write(build_svg("light"))
-    with open(OUTPUT_DARK, "w", encoding="utf-8") as f:
-        f.write(build_svg("dark"))
+    with open(OUTPUT_LIGHT, "w", encoding="utf-8") as handle:
+        handle.write(build_svg("light"))
+    with open(OUTPUT_DARK, "w", encoding="utf-8") as handle:
+        handle.write(build_svg("dark"))
     print(f"Wrote {OUTPUT_LIGHT} and {OUTPUT_DARK}")
-    for scenario in build_scenario_windows():
-        print(f"  {scenario['word']}: {len(scenario['cells'])} cells")
+    for scenario in build_scenarios():
+        print(
+            f"  {scenario['word']}: {len(scenario['cells'])} cells | "
+            f"show={scenario['show_start']:.2f} eat={scenario['eat_start']:.2f}-{scenario['eat_end']:.2f}"
+        )
     return 0
 
 
