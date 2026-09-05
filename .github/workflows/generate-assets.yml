@@ -24,9 +24,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ── Text snake (Timeless → iCODE infinite loop) ───────────────────────
-      - name: Generate text snake SVGs
-        run: python3 .github/scripts/generate-text-snake.py
+      # ── Snake (reads live contribution grid) ──────────────────────────────
+      - name: Generate snake SVGs from contribution graph
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          outputs: |
+            dist/github-contribution-grid-snake.svg?color_snake=%23e11d48&color_dots[0]=%23ebedf0&color_dots[1]=%23c6e48b&color_dots[2]=%237bc96f&color_dots[3]=%23239a3b&color_dots[4]=%23196127
+            dist/github-contribution-grid-snake-dark.svg?color_snake=%23f97316&color_dots[0]=%230d1117&color_dots[1]=%230e4429&color_dots[2]=%23006d32&color_dots[3]=%2326a641&color_dots[4]=%2339d353
 
       # ── 3D Calendar ───────────────────────────────────────────────────────
       - name: Generate 3D contribution calendar
