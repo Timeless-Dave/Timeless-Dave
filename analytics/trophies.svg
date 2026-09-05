@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="150" viewBox="0 0 900 150" role="img" aria-label="GitHub trophies for Timeless-Dave">
+  <rect width="900" height="150" rx="12" fill="#0d1117"/>
+  
+    <g transform="translate(12, 0)">
+      <rect x="0" y="0" width="140" height="150" rx="10" fill="#1a1b27" stroke="#30363d"/>
+      <text x="70" y="18" fill="#a78bfa" font-size="11" text-anchor="middle" font-family="ui-monospace, monospace">Commits</text>
+      
+    <g transform="translate(20, 8)">
+      <rect x="10" y="78" width="80" height="8" rx="3" fill="#4b5563"/>
+      <rect x="6" y="86" width="88" height="6" rx="2" fill="#161b22"/>
+      <path d="M26 18 h48 v6 c0 22-10 34-24 38 c-14-4-24-16-24-38 v-6z" fill="#6b7280" stroke="#4b5563" stroke-width="2"/>
+      <path d="M22 18 h56 v8 h-56z" fill="#4b5563" opacity="0.35"/>
+      <ellipse cx="50" cy="18" rx="28" ry="6" fill="#4b5563"/>
+      <text x="50" y="48" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700" font-family="ui-monospace, monospace">C</text>
+    </g>
+      <text x="70" y="112" fill="#c9d1d9" font-size="10" text-anchor="middle" font-family="ui-monospace, monospace">First Commit</text>
+      <text x="70" y="132" fill="#8b949e" font-size="12" text-anchor="middle" font-family="ui-monospace, monospace">3,779</text>
+    </g>
+    <g transform="translate(160, 0)">
+      <rect x="0" y="0" width="140" height="150" rx="10" fill="#1a1b27" stroke="#30363d"/>
+      <text x="70" y="18" fill="#a78bfa" font-size="11" text-anchor="middle" font-family="ui-monospace, monospace">Stars</text>
+      
+    <g transform="translate(20, 8)">
+      <rect x="10" y="78" width="80" height="8" rx="3" fill="#21262d"/>
+      <rect x="6" y="86" width="88" height="6" rx="2" fill="#161b22"/>
+      <path d="M26 18 h48 v6 c0 22-10 34-24 38 c-14-4-24-16-24-38 v-6z" fill="#30363d" stroke="#21262d" stroke-width="2"/>
+      <path d="M22 18 h56 v8 h-56z" fill="#21262d" opacity="0.35"/>
+      <ellipse cx="50" cy="18" rx="28" ry="6" fill="#21262d"/>
+      <text x="50" y="48" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700" font-family="ui-monospace, monospace">·</text>
+    </g>
+      <text x="70" y="112" fill="#c9d1d9" font-size="10" text-anchor="middle" font-family="ui-monospace, monospace">No data</text>
+      <text x="70" y="132" fill="#8b949e" font-size="12" text-anchor="middle" font-family="ui-monospace, monospace">0</text>
+    </g>
+    <g transform="translate(308, 0)">
+      <rect x="0" y="0" width="140" height="150" rx="10" fill="#1a1b27" stroke="#30363d"/>
+      <text x="70" y="18" fill="#a78bfa" font-size="11" text-anchor="middle" font-family="ui-monospace, monospace">Repos</text>
+      
+    <g transform="translate(20, 8)">
+      <rect x="10" y="78" width="80" height="8" rx="3" fill="#4b5563"/>
+      <rect x="6" y="86" width="88" height="6" rx="2" fill="#161b22"/>
+      <path d="M26 18 h48 v6 c0 22-10 34-24 38 c-14-4-24-16-24-38 v-6z" fill="#6b7280" stroke="#4b5563" stroke-width="2"/>
+      <path d="M22 18 h56 v8 h-56z" fill="#4b5563" opacity="0.35"/>
+      <ellipse cx="50" cy="18" rx="28" ry="6" fill="#4b5563"/>
+      <text x="50" y="48" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700" font-family="ui-monospace, monospace">C</text>
+    </g>
+      <text x="70" y="112" fill="#c9d1d9" font-size="10" text-anchor="middle" font-family="ui-monospace, monospace">First Repository</text>
+      <text x="70" y="132" fill="#8b949e" font-size="12" text-anchor="middle" font-family="ui-monospace, monospace">41</text>
+    </g>
+    <g transform="translate(456, 0)">
+      <rect x="0" y="0" width="140" height="150" rx="10" fill="#1a1b27" stroke="#30363d"/>
+      <text x="70" y="18" fill="#a78bfa" font-size="11" text-anchor="middle" font-family="ui-monospace, monospace">PRs</text>
+      
+    <g transform="translate(20, 8)">
+      <rect x="10" y="78" width="80" height="8" rx="3" fill="#4b5563"/>
+      <rect x="6" y="86" width="88" height="6" rx="2" fill="#161b22"/>
+      <path d="M26 18 h48 v6 c0 22-10 34-24 38 c-14-4-24-16-24-38 v-6z" fill="#6b7280" stroke="#4b5563" stroke-width="2"/>
+      <path d="M22 18 h56 v8 h-56z" fill="#4b5563" opacity="0.35"/>
+      <ellipse cx="50" cy="18" rx="28" ry="6" fill="#4b5563"/>
+      <text x="50" y="48" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700" font-family="ui-monospace, monospace">C</text>
+    </g>
+      <text x="70" y="112" fill="#c9d1d9" font-size="10" text-anchor="middle" font-family="ui-monospace, monospace">First Pull</text>
+      <text x="70" y="132" fill="#8b949e" font-size="12" text-anchor="middle" font-family="ui-monospace, monospace">31</text>
+    </g>
+    <g transform="translate(604, 0)">
+      <rect x="0" y="0" width="140" height="150" rx="10" fill="#1a1b27" stroke="#30363d"/>
+      <text x="70" y="18" fill="#a78bfa" font-size="11" text-anchor="middle" font-family="ui-monospace, monospace">Issues</text>
+      
+    <g transform="translate(20, 8)">
+      <rect x="10" y="78" width="80" height="8" rx="3" fill="#21262d"/>
+      <rect x="6" y="86" width="88" height="6" rx="2" fill="#161b22"/>
+      <path d="M26 18 h48 v6 c0 22-10 34-24 38 c-14-4-24-16-24-38 v-6z" fill="#30363d" stroke="#21262d" stroke-width="2"/>
+      <path d="M22 18 h56 v8 h-56z" fill="#21262d" opacity="0.35"/>
+      <ellipse cx="50" cy="18" rx="28" ry="6" fill="#21262d"/>
+      <text x="50" y="48" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700" font-family="ui-monospace, monospace">·</text>
+    </g>
+      <text x="70" y="112" fill="#c9d1d9" font-size="10" text-anchor="middle" font-family="ui-monospace, monospace">No data</text>
+      <text x="70" y="132" fill="#8b949e" font-size="12" text-anchor="middle" font-family="ui-monospace, monospace">0</text>
+    </g>
+    <g transform="translate(752, 0)">
+      <rect x="0" y="0" width="140" height="150" rx="10" fill="#1a1b27" stroke="#30363d"/>
+      <text x="70" y="18" fill="#a78bfa" font-size="11" text-anchor="middle" font-family="ui-monospace, monospace">Followers</text>
+      
+    <g transform="translate(20, 8)">
+      <rect x="10" y="78" width="80" height="8" rx="3" fill="#4b5563"/>
+      <rect x="6" y="86" width="88" height="6" rx="2" fill="#161b22"/>
+      <path d="M26 18 h48 v6 c0 22-10 34-24 38 c-14-4-24-16-24-38 v-6z" fill="#6b7280" stroke="#4b5563" stroke-width="2"/>
+      <path d="M22 18 h56 v8 h-56z" fill="#4b5563" opacity="0.35"/>
+      <ellipse cx="50" cy="18" rx="28" ry="6" fill="#4b5563"/>
+      <text x="50" y="48" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700" font-family="ui-monospace, monospace">C</text>
+    </g>
+      <text x="70" y="112" fill="#c9d1d9" font-size="10" text-anchor="middle" font-family="ui-monospace, monospace">First Friend</text>
+      <text x="70" y="132" fill="#8b949e" font-size="12" text-anchor="middle" font-family="ui-monospace, monospace">11</text>
+    </g>
+</svg>
